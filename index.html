@@ -184,6 +184,21 @@
         window.addEventListener('load', ()=>{ audio.play().catch(()=>console.log("Autoplay blocked")) });
         window.addEventListener('click', ()=>audio.play().catch(()=>{}));
         window.addEventListener('touchstart', ()=>audio.play().catch(()=>{}));
+<audio id="bg-audio" loop preload="auto">
+    <source src="assets/audio/Eid_Mubarak_Naat_2022.mp3" type="audio/mpeg">
+</audio>
+function handleStart() {
+    const audio = document.getElementById('bg-audio');
+    if (audio) {
+        // Try to play immediately
+        audio.play().catch(() => {
+            // If autoplay blocked, play on first click
+            document.body.addEventListener('click', () => audio.play(), { once: true });
+        });
+    }
+    goToStep(2);
+}
+
     </script>
 </body>
 </html>
